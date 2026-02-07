@@ -1,0 +1,60 @@
+import PyInstaller.__main__
+import os
+
+current_dir = os.path.abspath(".")
+
+PyInstaller.__main__.run([
+    'main.py',
+    '--noconfirm',
+    '--onefile',
+    '--windowed',
+    '--name=SignVise',
+    
+    # 1. EXPLICIT DATA INCLUSION
+    f'--add-data={os.path.join(current_dir, "ASSETS")}{os.pathsep}ASSETS',
+    f'--add-data={current_dir}{os.pathsep}.',
+    
+    # --- 2. THE MEGA HIDDEN IMPORTS LIST ---
+    '--hidden-import=cv2',
+    '--hidden-import=mediapipe',
+    '--hidden-import=pyttsx3',
+    '--hidden-import=speech_recognition',
+    '--hidden-import=pyaudio',
+    '--hidden-import=playsound',
+    '--hidden-import=pygame',
+    '--hidden-import=torch',
+    '--hidden-import=numpy',
+    '--hidden-import=pandas',
+    '--hidden-import=spellchecker',
+    '--hidden-import=geocoder',
+    '--hidden-import=twilio',
+    '--hidden-import=customtkinter',
+    '--hidden-import=PIL.ImageTk',
+    '--hidden-import=pyautogui',
+    '--hidden-import=pickle',
+    '--hidden-import=sklearn',
+    '--hidden-import=gTTS,',
+    '--hidden-import=twilio.rest',
+    '--hidden-import=tkinter.scrolledtext',
+    '--hidden-import=gtts',
+    '--hidden-import=sklearn.utils._cython_blas',
+    '--hidden-import=sklearn.neighbors.typedefs',
+    '--hidden-import=sklearn.neighbors._partition_nodes',
+    '--hidden-import=sklearn.utils._typedefs',
+    '--hidden-import=sklearn.utils._heap',
+    '--hidden-import=sklearn.utils._sorting',
+    '--hidden-import=sklearn.utils._vector_sentinel',
+    
+    # --- 3. COLLECT ALL BINARIES ---
+    '--collect-all=mediapipe',
+    '--collect-all=customtkinter',
+    '--collect-all=pyaudio',
+    '--collect-all=pygame',
+    '--collect-all=torch',
+    '--collect-all=numpy',
+    '--collect-all=sklearn',
+    '--collect-all=spellchecker',
+    
+    # --- 4. ICON ---
+    f'--icon={os.path.join(current_dir, "ASSETS", "pragyaan_logo.png")}',
+])
